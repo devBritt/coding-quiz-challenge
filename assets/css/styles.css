@@ -14,17 +14,18 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-h1, h2 {
     font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
     font-size: 40px;
 }
+h2 {
+    font-size: 36px;
+}
 p, span {
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
 }
 .btn {
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     background: var(--teal);
     color: var(--white);
@@ -58,6 +59,37 @@ header {
     margin-bottom: 15px;
 }
 
+/* quiz styles */
+#quiz {
+    margin-left: 20%;
+    margin-right: 10%;
+}
+.question {
+    margin: 15px 0;
+}
+.answers-container {
+    display: flex;
+    flex-direction: column;
+}
+.answer {
+    width: 200px;
+    text-align: left;
+    margin-bottom: 15px;
+}
+.is-correct {
+    border-top: 2px solid var(--gray);
+}
+.is-correct p {
+    margin-top: 5px;
+    color: var(--gray);
+    font-style: italic;
+}
+
+/* utility styles */
+/* hide content */
+.hide {
+    display: none;
+}
 
 /* MEDIA QUERIES FOR RESPONSIVE SIZING */
 /* TABLET BREAKPOINT */
