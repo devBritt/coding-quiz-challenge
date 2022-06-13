@@ -1,0 +1,70 @@
+/* variables */
+:root {
+    /* color */
+    --teal: #01a3a4;
+    --green: #1dd1a1;
+    --gray: #8395a7;
+    --black: #222f3e;
+    --white: #fff;
+}
+
+/* global styles */
+* {
+    /* override browser defaults */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1, h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+}
+p, span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+.btn {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    background: var(--teal);
+    color: var(--white);
+    padding: 7px 10px;
+    border: none;
+    border-radius: 6px;
+}
+.btn:hover {
+    background: var(--green);
+}
+
+/* header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 25px 15px 25px;
+}
+#view-scores {
+    color: var(--green);
+}
+#view-scores:hover {
+    color: var(--teal);
+}
+
+/* instructions styles */
+#instructions {
+    padding: 0 10%;
+    text-align: center;
+}
+#instructions h1, #instructions p {
+    margin-bottom: 15px;
+}
+
+
+/* MEDIA QUERIES FOR RESPONSIVE SIZING */
+/* TABLET BREAKPOINT */
+/* @media screen and (min-width: 481px) {} */
+
+/* SMALL SCREENS BREAKPOINT */
+/* @media screen and (min-width: 769px) {} */
+
+/* LARGE SCREENS BREAKPOINT */
+/* @media screen and (min-width: 1025px) {} */

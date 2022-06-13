@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timed Coding Quiz</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body>
+    <!-- header with view scores button and timer -->
+    <!-- will be hidden when submitting/viewing high scores -->
+    <header>
+        <!-- link/button to view all high scores -->
+        <p id="view-scores">View high scores</p>
+        <!-- timer -->
+        <p id="timer">Time: <span id="time">0</span></p>
+    </header>
+
+    <!-- main section to be filled dynamically -->
+    <main>
+        <!-- quiz instructions to display on page load -->
+        <section id="instructions">
+            <h1>Coding Quiz Challenge</h1>
+            <p>Welcome to the coding quiz challenge! Try to answer each question as quickly as you can but remember, any wrong answers will result in a ten second penalty to your time and score!</p>
+            <button id="start" class="btn">Start Quiz</button>
+        </section>
+        <!-- quiz section to be filled dynamically -->
+        <section id="quiz" class="hide">
+            <!-- question goes here -->
+            <!-- answer buttons go here -->
+            <!-- correct/wrong goes here -->
+        </section>
+    </main>
+
+    <!-- js scripts -->
+    <script src="./assets/js/scripts.js"></script>
+</body>
+</html>
