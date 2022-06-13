@@ -7,6 +7,7 @@ var finalScoreSectionEl = document.querySelector("#final-score");
 var submitScoreBtnEl = document.querySelector("#submit")
 var viewScoresSectionEl = document.querySelector("#high-scores");
 var highScoresEl = document.querySelector("#scores-list");
+var viewScoresEl = document.querySelector("#view-scores");
 // array containing quiz question objects with answers arrays
 var quizOptions = [
     {
@@ -218,15 +219,13 @@ function updateQuiz() {
 
 // function to end quiz
 function endQuiz() {
+    clearInterval(timeInterval);
     // set score
     score = timeLeft;
     // clear quiz section contents
     while (quizSectionEl.firstChild) {
         quizSectionEl.removeChild(quizSectionEl.firstChild);
     }
-
-    // display final score section
-    toggleSections(quizSectionEl, finalScoreSectionEl);
 }
 
 // function to create list of high scores
@@ -336,11 +335,13 @@ function answerBtnHandler(event) {
         updateQuiz();
     } else {
         // stop timer
-        clearInterval(timeInterval);
+        endQuiz();
+        
         // update timer display
         document.querySelector("#time").textContent = timeLeft;
-
-        endQuiz();
+        
+        // display final score section
+        toggleSections(quizSectionEl, finalScoreSectionEl);
 
         // display final score
         document.querySelector("#score").textContent = score;
@@ -372,6 +373,24 @@ function submitBtnHandler() {
     }
 }
 
+// function to handle "View high scores" click
+function viewScoresBtnHandler() {
+    // determine current screen
+    if (instructionsEl.classList[0] !== "hide") {
+        toggleSections(instructionsEl, viewScoresSectionEl);
+    }
+    if (quizSectionEl.classList[0] !== "hide") {
+        endQuiz();
+        toggleSections(quizSectionEl, viewScoresSectionEl);
+        // hide header
+        document.querySelector("header").className = "hide";
+    }
+    if (finalScoreSectionEl.classList[0] !== "hide") {
+        toggleSections(finalScoreSectionEl, viewScoresEl);
+    }
+    
+}
+
 // event listeners
 // listen for "Start Quiz" button click
 startQuizBtnEl.addEventListener("click", startQuizBtnHandler);
@@ -381,6 +400,9 @@ quizSectionEl.addEventListener("click", answerBtnHandler);
 
 // listen for submit button click
 submitScoreBtnEl.addEventListener("click", submitBtnHandler);
+
+// listen for "View high scores" button click
+viewScoresEl.addEventListener("click", viewScoresBtnHandler);
 
 // load high scores list on app load
 loadScores();
