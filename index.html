@@ -32,10 +32,14 @@
             <!-- correct/wrong goes here -->
         </section>
         <!-- submit score section to be filled dynamically -->
-        <section id="submit-score" class="hide">
-            <!-- quiz over text goes here -->
-            <!-- final score text goes here -->
-            <!-- input intiials and submit button go here -->
+        <section id="final-score" class="hide">
+            <h2>All done!</h2>
+            <p>Your final score is <span id="score"></span>.</p>
+            <div id="submit-score">
+                <label for="initials">Enter initials: </label>
+                <input type="text" placeholder="AAA" name="initials" id="initials" />
+                <button id="submit" class="btn">Submit</button>
+            </div>
         </section>
         <!-- high scores view to be filled dynamically -->
         <section id="high-scores" class="hide">

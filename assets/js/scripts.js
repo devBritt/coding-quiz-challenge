@@ -2,7 +2,8 @@
 var instructionsEl = document.querySelector("#instructions");
 var startQuizBtnEl = document.querySelector("#start");
 var quizSectionEl = document.querySelector("#quiz");
-var submitScoreSectionEl = document.querySelector("#submit-score");
+var finalScoreSectionEl = document.querySelector("#final-score");
+var submitScoreBtnEl = document.querySelector("#submit")
 var viewScoresSectionEl = document.querySelector("#high-scores");
 var quizOptions = [
     {
@@ -112,6 +113,8 @@ var quizOptions = [
     }
 ]
 var questionIndex = 0;
+var score = 0;
+var scoreList = [];
 
 // functions
 // function to toggle active/inactive sections
@@ -123,15 +126,9 @@ function toggleSections(hideSection, showSection) {
     if (showSection === quizSectionEl) {
         createQuiz();
     }
-    else if (showSection === submitScoreSectionEl) {
-        console.log(true);
-    }
-    else if (showSection === viewScoresSectionEl) {
-        console.log(true);
-    }
 }
 
-// function to create quiz q and a screen
+// function to create quiz question and answer section
 function createQuiz() {
     // create question element
     var questionEl = document.createElement("h2");
@@ -170,6 +167,7 @@ function createQuiz() {
     // append isCorrectEl to quiz section
     quizSectionEl.appendChild(isCorrectEl);
 }
+
 // function to display if chosen answer was correct
 function isAnswerCorrect(isCorrect) {
     // create div to display when answer button is clicked
@@ -185,7 +183,8 @@ function isAnswerCorrect(isCorrect) {
         isCorrectEl.innerHTML = "<p>Wrong!</p>";
     }
 }
-// funtion to update quiz q and a text
+
+// funtion to update quiz question and answer text
 function updateQuiz() {
     // increment questionIndex to create next question
     questionIndex++;
@@ -200,6 +199,17 @@ function updateQuiz() {
         var answerBtnEl = document.querySelector("[data-answer-id='" + i + "']");
         answerBtnEl.textContent = quizOptions[questionIndex].answers[i].answer;
     }
+}
+
+// function to end quiz
+function endQuiz() {
+    // clear quiz section contents
+    while (quizSectionEl.firstChild) {
+        quizSectionEl.removeChild(quizSectionEl.firstChild);
+    }
+
+    // display final score section
+    toggleSections(quizSectionEl, finalScoreSectionEl);
 }
 
 // event handlers
@@ -220,6 +230,12 @@ function answerBtnHandler(event) {
     // update quiz question and answer buttons
     if (questionIndex < quizOptions.length - 1) {
         updateQuiz();
+    } else {
+        debugger;
+        endQuiz();
+
+        // display final score
+        document.querySelector("#score").textContent = score;
     }
 }
 

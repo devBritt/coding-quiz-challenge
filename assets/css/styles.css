@@ -22,8 +22,11 @@ h1 {
 h2 {
     font-size: 36px;
 }
-p, span {
+p, span, label {
     font-size: 20px;
+}
+input {
+    font-size: 18px;
 }
 .btn {
     font-size: 20px;
@@ -72,7 +75,7 @@ header {
     flex-direction: column;
 }
 .answer {
-    width: 200px;
+    width: 250px;
     text-align: left;
     margin-bottom: 15px;
 }
@@ -83,6 +86,29 @@ header {
     margin-top: 5px;
     color: var(--gray);
     font-style: italic;
+}
+
+/* final score submit styles */
+#final-score {
+    margin-left: 20%;
+    margin-right: 10%;
+}
+#final-score h2 {
+    margin-bottom: 10px;
+}
+#submit-score {
+    margin-top: 10px;
+}
+#submit-score label, #submit-score input {
+    margin-right: 15px;
+}
+#submit-score input {
+    padding: 4px;
+    border-radius: 0;
+    border: 1px solid var(--gray);
+}
+#submit {
+    font-size: 18px;
 }
 
 /* utility styles */
