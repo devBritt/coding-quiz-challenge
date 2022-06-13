@@ -238,6 +238,11 @@ function startTimer() {
     }, 1000);
 }
 
+// function to save scores to local storage
+function saveScores() {
+    localStorage.setItem("scores", JSON.stringify(scoreList));
+}
+
 // event handlers
 // function to handle "Start Quiz" button click
 function startQuizBtnHandler() {
@@ -270,9 +275,32 @@ function answerBtnHandler(event) {
     }
 }
 
+// function to handle "Submit" button click
+function submitBtnHandler() {
+    // get initials from input
+    var initials = document.querySelector("#initials").value;
+    if (!initials) {
+        window.alert("Please enter your initials in the box below!");
+    } else if (initials.length === 2 || initials.length === 3) {
+        // create high score object
+        var highScore = {
+            initials: initials,
+            score: score
+        };
+        // add high score object to score list
+        scoreList.push(highScore);
+        saveScores();
+    } else {
+        window.alert("Make sure you enter 2 or 3 initials.");
+    }
+}
+
 // event listeners
 // listen for "Start Quiz" button click
 startQuizBtnEl.addEventListener("click", startQuizBtnHandler);
 
 // listen for answer button clicks
 quizSectionEl.addEventListener("click", answerBtnHandler);
+
+// listen for submit button click
+submitScoreBtnEl.addEventListener("click", submitBtnHandler);
