@@ -1,10 +1,13 @@
 // global variables
+// DOM element references
 var instructionsEl = document.querySelector("#instructions");
 var startQuizBtnEl = document.querySelector("#start");
 var quizSectionEl = document.querySelector("#quiz");
 var finalScoreSectionEl = document.querySelector("#final-score");
 var submitScoreBtnEl = document.querySelector("#submit")
 var viewScoresSectionEl = document.querySelector("#high-scores");
+var highScoresEl = document.querySelector("#scores-list");
+// array containing quiz question objects with answers arrays
 var quizOptions = [
     {
         question: "Commonly used data types DO NOT include:",
@@ -112,10 +115,14 @@ var quizOptions = [
         ]
     }
 ]
+// to track current question
 var questionIndex = 0;
 var score = 0;
+// to update timer when penalized
 var timeLeft = 0;
+// array containing submitted high scores
 var scoreList = [];
+// to clear interval when quiz is completed before time runs out
 var timeInterval;
 
 // functions
@@ -127,6 +134,11 @@ function toggleSections(hideSection, showSection) {
     // call function to create active section
     if (showSection === quizSectionEl) {
         createQuiz();
+    }
+
+    // call function to create list of high scores
+    if (showSection === viewScoresSectionEl) {
+        createHighScoresList();
     }
 }
 
@@ -217,6 +229,54 @@ function endQuiz() {
     toggleSections(quizSectionEl, finalScoreSectionEl);
 }
 
+// function to create list of high scores
+function createHighScoresList() {
+    // get high scores
+    var scores = scoreList;
+
+    // list item counter
+    var counter = 1
+
+    // until scores is empty, iterate through to find highest score
+    while (scores.length > 0) {
+        // index of high score
+        var scoreIndex = 0;
+        // find highest score
+        for (var i = 1; i < scores.length; i++) {
+            // compare current highest value to current index
+            if (scores[i].score > scores[scoreIndex].score) {
+                scoreIndex = i;
+                console.log(scores[i].score);
+            }
+        }
+        // remove score from array and create list item with contents
+        var scoreItem = scores.splice(scoreIndex, 1);
+        createLiEl(scoreItem, counter);
+
+        // increment list item counter
+        counter++;
+    }
+}
+
+// function to create high score list item
+function createLiEl(scoreItem, counter) {
+    // create list item element
+    var scoreItemEl = document.createElement("li");
+    
+    // add class(es) for styles
+    if (!(counter%2 === 0)) {
+        scoreItemEl.className = "score-item odd";
+    } else {
+        scoreItemEl.className = "score-item";
+    }
+
+    // add text to list item
+    scoreItemEl.textContent = counter + ". " + scoreItem[0].initials.toUpperCase() + "  " + scoreItem[0].score;
+
+    // append list item to unordered list
+    highScoresEl.appendChild(scoreItemEl);
+}
+
 // timer function
 function startTimer() {
     // get time element reference
@@ -241,6 +301,18 @@ function startTimer() {
 // function to save scores to local storage
 function saveScores() {
     localStorage.setItem("scores", JSON.stringify(scoreList));
+}
+
+// function to load scores from local storage
+function loadScores() {
+    // get scores list from storage
+    var savedScores = localStorage.getItem("scores");
+
+    // if savedScores is empty, don't load anything, otherwise load items
+    if (savedScores === null) {
+        return false;
+    }
+    scoreList = JSON.parse(savedScores);
 }
 
 // event handlers
@@ -290,6 +362,11 @@ function submitBtnHandler() {
         // add high score object to score list
         scoreList.push(highScore);
         saveScores();
+
+        // switch section views
+        toggleSections(finalScoreSectionEl, viewScoresSectionEl);
+        // hide header
+        document.querySelector("header").className = "hide";
     } else {
         window.alert("Make sure you enter 2 or 3 initials.");
     }
@@ -304,3 +381,6 @@ quizSectionEl.addEventListener("click", answerBtnHandler);
 
 // listen for submit button click
 submitScoreBtnEl.addEventListener("click", submitBtnHandler);
+
+// load high scores list on app load
+loadScores();

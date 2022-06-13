@@ -111,6 +111,31 @@ header {
     font-size: 18px;
 }
 
+/* high scores section styles */
+#high-scores {
+    margin-left: 20%;
+    margin-top: 100px;
+}
+#high-scores h2 {
+    margin-bottom: 25px;
+}
+#high-scores button {
+    margin-top: 25px;
+}
+.score-item {
+    margin: 10px 0;
+    margin-right: 50%;
+    padding: 10px;
+    color: var(--black);
+    background: rgba(29, 209, 161, 0.5);
+    list-style-type: none;
+    border-radius: 3px;
+}
+.odd {
+    color: var(--white);
+    background: rgba(1, 163, 164, 0.5);
+}
+
 /* utility styles */
 /* hide content */
 .hide {
