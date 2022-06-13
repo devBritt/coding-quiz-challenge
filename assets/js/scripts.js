@@ -114,7 +114,9 @@ var quizOptions = [
 ]
 var questionIndex = 0;
 var score = 0;
+var timeLeft = 0;
 var scoreList = [];
+var timeInterval;
 
 // functions
 // function to toggle active/inactive sections
@@ -181,6 +183,7 @@ function isAnswerCorrect(isCorrect) {
         isCorrectEl.innerHTML = "<p>Correct!</p>";
     } else {
         isCorrectEl.innerHTML = "<p>Wrong!</p>";
+        timeLeft -= 10;
     }
 }
 
@@ -203,6 +206,8 @@ function updateQuiz() {
 
 // function to end quiz
 function endQuiz() {
+    // set score
+    score = timeLeft;
     // clear quiz section contents
     while (quizSectionEl.firstChild) {
         quizSectionEl.removeChild(quizSectionEl.firstChild);
@@ -212,10 +217,32 @@ function endQuiz() {
     toggleSections(quizSectionEl, finalScoreSectionEl);
 }
 
+// timer function
+function startTimer() {
+    // get time element reference
+    var timeEl = document.querySelector("#time");
+    // initial time
+    timeLeft = 75;
+    // display time
+    timeEl.textContent = timeLeft
+
+    timeInterval = setInterval(function () {
+        // decrement time
+        timeLeft--;
+        // update timer
+        timeEl.textContent = timeLeft
+        if (timeLeft < 1) {
+            endQuiz();
+            clearInterval(timeInterval);
+        }
+    }, 1000);
+}
+
 // event handlers
 // function to handle "Start Quiz" button click
 function startQuizBtnHandler() {
     // hide start screen
+    startTimer();
     toggleSections(instructionsEl, quizSectionEl);
 }
 
@@ -231,7 +258,11 @@ function answerBtnHandler(event) {
     if (questionIndex < quizOptions.length - 1) {
         updateQuiz();
     } else {
-        debugger;
+        // stop timer
+        clearInterval(timeInterval);
+        // update timer display
+        document.querySelector("#time").textContent = timeLeft;
+
         endQuiz();
 
         // display final score
