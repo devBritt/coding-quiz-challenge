@@ -21,7 +21,7 @@ This is a timed, multiple-choice coding quiz that can save high scores.
 
 [Coding Quiz Challenge](https://devbritt.github.io/coding-quiz-challenge/)
 
-![App Demo](./assets/images/Timed-Coding-Quiz.mp4)
+![App Demo](./assets/images/Timed-Coding-Quiz.gif)
 
 ## Lessons Learned
 
