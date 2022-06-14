@@ -4,10 +4,11 @@ var instructionsEl = document.querySelector("#instructions");
 var startQuizBtnEl = document.querySelector("#start");
 var quizSectionEl = document.querySelector("#quiz");
 var finalScoreSectionEl = document.querySelector("#final-score");
-var submitScoreBtnEl = document.querySelector("#submit")
 var viewScoresSectionEl = document.querySelector("#high-scores");
+var submitScoreBtnEl = document.querySelector("#submit");
 var highScoresEl = document.querySelector("#scores-list");
 var viewScoresEl = document.querySelector("#view-scores");
+var goBackBtnEl = document.querySelector("#home");
 // array containing quiz question objects with answers arrays
 var quizOptions = [
     {
@@ -131,6 +132,14 @@ var timeInterval;
 function toggleSections(hideSection, showSection) {
     hideSection.className = "hide";
     showSection.classList.remove("hide");
+
+    // reset quiz variables
+    if (showSection === instructionsEl) {
+        questionIndex = 0;
+        score = 0;
+        timeLeft = 0;
+        document.querySelector("#time").textContent = timeLeft;
+    }
 
     // call function to create active section
     if (showSection === quizSectionEl) {
@@ -391,6 +400,14 @@ function viewScoresBtnHandler() {
     
 }
 
+// function to handle "Go Back" button click
+function goBackBtnHandler() {
+    // return to instructions
+    toggleSections(viewScoresSectionEl, instructionsEl);
+    // show header
+    document.querySelector("header").classList.remove("hide");
+}
+
 // event listeners
 // listen for "Start Quiz" button click
 startQuizBtnEl.addEventListener("click", startQuizBtnHandler);
@@ -403,6 +420,9 @@ submitScoreBtnEl.addEventListener("click", submitBtnHandler);
 
 // listen for "View high scores" button click
 viewScoresEl.addEventListener("click", viewScoresBtnHandler);
+
+// listen for "Go Back" button click
+goBackBtnEl.addEventListener("click", goBackBtnHandler);
 
 // load high scores list on app load
 loadScores();
