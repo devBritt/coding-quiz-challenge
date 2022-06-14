@@ -19,13 +19,14 @@ This is a timed, multiple-choice coding quiz that can save high scores.
 
 ## Demo
 
-Deployment link here.
+[Coding Quiz Challenge](https://devbritt.github.io/coding-quiz-challenge/)
 
-## Screenshots
-
-![App Screenshot](./assets/images/screenshot.jpg)
+![App Demo](./assets/images/screenshot.mp4)
 
 ## Lessons Learned
 
-What did you learn while building this project? What challenges did you face and how did you overcome them?
-
+This project was definitely more of a challenge than any of the others so far. 
+My biggest struggle was making sure to account for all the potential bugs, such as when returning to the instructions screen, 
+the timer needed to reset and re-displayed to show 0 instead of the end time from the previous playthrough. 
+Overcoming those bugs was a matter of trial and error. This project reinforced my ability to come up with creative solutions 
+to problems and to be self-sufficient in finding those solutions.
