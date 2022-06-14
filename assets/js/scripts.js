@@ -9,6 +9,7 @@ var submitScoreBtnEl = document.querySelector("#submit");
 var highScoresEl = document.querySelector("#scores-list");
 var viewScoresEl = document.querySelector("#view-scores");
 var goBackBtnEl = document.querySelector("#home");
+var clearScoresBtnEl = document.querySelector("#clear-list");
 // array containing quiz question objects with answers arrays
 var quizOptions = [
     {
@@ -239,11 +240,12 @@ function endQuiz() {
 
 // function to create list of high scores
 function createHighScoresList() {
+    debugger;
     // get high scores
     var scores = scoreList;
 
     // list item counter
-    var counter = 1
+    var counter = document.querySelector("#scores-list").childElementCount;
 
     // until scores is empty, iterate through to find highest score
     while (scores.length > 0) {
@@ -257,12 +259,12 @@ function createHighScoresList() {
                 console.log(scores[i].score);
             }
         }
+        // increment list item counter
+        counter++;
+
         // remove score from array and create list item with contents
         var scoreItem = scores.splice(scoreIndex, 1);
         createLiEl(scoreItem, counter);
-
-        // increment list item counter
-        counter++;
     }
 }
 
@@ -408,6 +410,18 @@ function goBackBtnHandler() {
     document.querySelector("header").classList.remove("hide");
 }
 
+// function to handle "Clear Scores" button click
+function clearScoresBtnHandler() {
+    // get scores list element
+    var scoresListEl = document.querySelector("#scores-list");
+    localStorage.clear();
+
+    // clear scores list contents
+    while (scoresListEl.firstChild) {
+        scoresListEl.removeChild(scoresListEl.firstChild);
+    }
+}
+
 // event listeners
 // listen for "Start Quiz" button click
 startQuizBtnEl.addEventListener("click", startQuizBtnHandler);
@@ -423,6 +437,9 @@ viewScoresEl.addEventListener("click", viewScoresBtnHandler);
 
 // listen for "Go Back" button click
 goBackBtnEl.addEventListener("click", goBackBtnHandler);
+
+// listen for "Clear Scores" button click
+clearScoresBtnEl.addEventListener("click", clearScoresBtnHandler);
 
 // load high scores list on app load
 loadScores();
